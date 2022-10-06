@@ -10,6 +10,32 @@
     <organization>
         <name>spark-scala-test</name>
     </organization>
+
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.3</version>
+            <configuration>
+                <compilerArgs>
+                    <arg>-Xmx512</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.19.1</version>
+            <configuration>
+                <argLine>-Dspark.ui.enabled=false</argLine>
+                <argLine>-Dspark.ui.showConsoleProgress=false</argLine>
+                <argLine>-Dspark.sql.shuffle.partitions=5</argLine>
+            </configuration>
+        </plugin>
+    </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -30,6 +56,18 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.12</artifactId>
             <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalamock</groupId>
+            <artifactId>scalamock-scalatest-support_2.12</artifactId>
+            <version>3.4.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.holdenkarau</groupId>
